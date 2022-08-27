@@ -32,7 +32,7 @@ class FoodManager:
     def remove(self, food):
         self.foodList.remove(food)
         
-    def update(self, snake):
+    def update(self, snake=[]):
         while len(self.foodList) < maxFood:
             coordinate = randomCoordinateNotExisting(snake, foodList=self.foodList)
             if coordinate == None:

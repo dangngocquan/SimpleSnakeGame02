@@ -63,7 +63,7 @@ class Game:
             
     def update(self):
         if self.countTicks % (screenSetting.FPS * 10000 // self.playerSnake.speed) == 0:
-            self.playerSnake.update()
+            self.playerSnake.update(self.foodManager.foodList)
             self.foodManager.update(self.playerSnake.snake)
     
     def draw(self):
