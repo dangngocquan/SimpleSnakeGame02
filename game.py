@@ -1,10 +1,11 @@
 import pygame
+from food import FoodManager, Food
 import screenSetting
 import sys
 from snake import PlayerSnake
 
 class Game:
-    def __init__(self, playerSnake=PlayerSnake(), score=0):
+    def __init__(self, playerSnake=PlayerSnake(), foodManager=FoodManager(), score=0):
         pygame.init()
         self.screen = pygame.display.set_mode((screenSetting.WIDTH, screenSetting.HEIGHT))
         pygame.display.set_caption("Simple Snake")
@@ -16,6 +17,7 @@ class Game:
         self.lose = False
         self.score = score
         self.playerSnake = playerSnake
+        self.foodManager = foodManager
     
     def run(self):
         while self.running:
@@ -62,11 +64,14 @@ class Game:
     def update(self):
         if self.countTicks % (screenSetting.FPS * 10000 // self.playerSnake.speed) == 0:
             self.playerSnake.update()
+            self.foodManager.update(self.playerSnake.snake)
     
     def draw(self):
         self.screen.fill((0, 0, 0))
         for block in self.playerSnake.snake:
             self.screen.blit(block.picture, block.coordinate)
+        for food in self.foodManager.foodList:
+            self.screen.blit(food.picture, food.coordinate)
         pygame.display.flip()
     
     
