@@ -68,10 +68,10 @@ class Game:
     
     def draw(self):
         self.screen.fill((0, 0, 0))
-        for block in self.playerSnake.snake:
-            self.screen.blit(block.picture, block.coordinate)
         for food in self.foodManager.foodList:
             self.screen.blit(food.picture, food.coordinate)
+        for i in range(len(self.playerSnake.snake)-1, -1, -1):
+            self.screen.blit(self.playerSnake.snake[i].picture, self.playerSnake.snake[i].coordinate)
         pygame.display.flip()
     
     
