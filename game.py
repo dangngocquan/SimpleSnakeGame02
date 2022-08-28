@@ -19,6 +19,25 @@ class Game:
         self.playerSnake = playerSnake
         self.foodManager = foodManager
     
+    def showStartGameScreen(self):
+        pass
+    
+    def showEndGameScreen(self):
+        while self.waiting:
+            self.screen.fill((0, 0, 0))
+            for food in self.foodManager.foodList:
+                self.screen.blit(food.picture, food.coordinate)
+            for i in range(len(self.playerSnake.snake)-1, -1, -1):
+                self.screen.blit(self.playerSnake.snake[i].picture, self.playerSnake.snake[i].coordinate)
+            gameOverText = pygame.font.SysFont(None, 60).render(f"Game Over", True, (255, 255, 255))
+            scoreText = pygame.font.SysFont(None, 25).render(f"Your score: {self.score}", True, (255, 255, 255))
+            self.screen.blit(gameOverText, (285, 200))
+            self.screen.blit(scoreText, (330, 270))
+            pygame.display.flip()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.waiting = False
+    
     def run(self):
         while self.running:
             self.clock.tick(screenSetting.FPS)
@@ -27,6 +46,8 @@ class Game:
                 self.countTicks = (self.countTicks + 1) % (screenSetting.FPS * 10000)
                 self.update()
             self.draw()
+            if self.playerSnake.snakeDeath():
+                self.running = False
     
     def event(self):
         for event in pygame.event.get():
@@ -65,6 +86,7 @@ class Game:
         if self.countTicks % (screenSetting.FPS * 10000 // self.playerSnake.speed) == 0:
             self.playerSnake.update(self.foodManager.foodList)
             self.foodManager.update(self.playerSnake.snake)
+            self.score = self.playerSnake.score
     
     def draw(self):
         self.screen.fill((0, 0, 0))
@@ -72,6 +94,8 @@ class Game:
             self.screen.blit(food.picture, food.coordinate)
         for i in range(len(self.playerSnake.snake)-1, -1, -1):
             self.screen.blit(self.playerSnake.snake[i].picture, self.playerSnake.snake[i].coordinate)
+        scoreText = pygame.font.SysFont(None, 25).render(f"Score: {self.score}", True, (255, 255, 255))
+        self.screen.blit(scoreText, (10, 10))
         pygame.display.flip()
     
     
