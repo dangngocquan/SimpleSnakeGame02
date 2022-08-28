@@ -35,25 +35,25 @@ class Game:
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
+                if event.key == pygame.K_UP or event.key == pygame.K_w:
                     if self.playerSnake.direction == None and self.playerSnake.lastDirection != None:
                         continue
-                    if self.playerSnake.direction != "D":
+                    if self.playerSnake.direction != "D" and self.playerSnake.checkNewHeadCoordinate("U"):
                         self.playerSnake.direction = "U"
-                elif event.key == pygame.K_DOWN:
+                elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
                     if self.playerSnake.direction == None and self.playerSnake.lastDirection != None:
                         continue
-                    if self.playerSnake.direction != "U":
+                    if self.playerSnake.direction != "U" and self.playerSnake.checkNewHeadCoordinate("D"):
                         self.playerSnake.direction = "D"
-                elif event.key == pygame.K_LEFT:
+                elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
                     if self.playerSnake.direction == None and self.playerSnake.lastDirection != None:
                         continue
-                    if self.playerSnake.direction != "R":
+                    if self.playerSnake.direction != "R" and self.playerSnake.checkNewHeadCoordinate("L"):
                         self.playerSnake.direction = "L"
-                elif event.key == pygame.K_RIGHT:
+                elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                     if self.playerSnake.direction == None and self.playerSnake.lastDirection != None:
                         continue
-                    if self.playerSnake.direction != "L":
+                    if self.playerSnake.direction != "L" and self.playerSnake.checkNewHeadCoordinate("R"):
                         self.playerSnake.direction = "R"
                 elif event.key == pygame.K_SPACE or event.key == pygame.K_ESCAPE:
                     if self.playerSnake.direction == None:
