@@ -1,4 +1,5 @@
 
+import time
 from game import Game
 
 def main():

@@ -6,7 +6,7 @@ import screenSetting
 
 class PlayerSnake:
     def __init__(self, snake=[Block(source=source.SNAKE_HEAD0)], head=[Block(source=source.SNAKE_HEAD0)], 
-                 body=[], tail=[], direction=None, lastDirection=None, speed=20, score=0):
+                 body=[], tail=[], direction=None, lastDirection=None, speed=10, score=0):
         self.snake = snake
         self.head = head
         self.body = body
