@@ -1,2 +1,2 @@
 # SimpleSnakeGameDemo01
-Đây là game Rắn săn mồi (Lần thứ hai).
+The third version of Snake game I done
